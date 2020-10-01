@@ -4,7 +4,8 @@ import {
   bugResolved,
   bugRemoved,
   getUnresolvedBugs,
-  getBugsByUser
+  getBugsByUser,
+  loadBugs,
 } from './store/bugs'
 import {
   projectAdded,
@@ -14,11 +15,28 @@ import {
 import {
   userAdded
 } from './store/users'
+import * as actions from './store/api'
 
 import configureStore from './store/configureStore'
 
 const store = configureStore();
 // console.log(store);
+console.log(loadBugs)
+
+// store.dispatch(actions.apiCallBegan({
+//   url:"/bugs",
+//   onSuccess: "bugs/bugsReceived"
+// }))
+store.dispatch(loadBugs())
+
+// store.dispatch({  
+//   type: 'apiCallBegan',
+// payload:{
+//   url:'/bugs',
+//   onSuccess:'bugsReceived',
+//   onError:'apiRequestFailed'
+// }})
+
 // store.dispatch(userAdded({name:"Joe"}))
 // store.dispatch(bugAdded({description:"Bug1"}))
 // store.dispatch(bugAdded({description:"Bug2"}))
@@ -29,8 +47,8 @@ const store = configureStore();
 // store.dispatch(projectAdded({description:"project1"}))
 // store.dispatch(projectAdded({description:"project2"}))
 // store.dispatch(projectResolved({id:2}))
-store.dispatch(projectRemoved({id:1}))
-store.dispatch({type:"error"})
+// store.dispatch(projectRemoved({id:1}))
+// store.dispatch({type:"error"})
 // store.dispatch((dispatch, getState) => {
 //   dispatch({
 //     type: "bugsReceived",
